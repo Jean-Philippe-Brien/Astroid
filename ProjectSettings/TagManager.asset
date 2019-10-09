@@ -18,12 +18,12 @@ TagManager:
   - 
   - Bullet
   - Player
-  - Wall
+  - WallXBottom
   - Meteor
-  - 
-  - 
-  - 
-  - 
+  - WallXTop
+  - WallYBottom
+  - WallYTop
+  - Wall
   - 
   - 
   - 

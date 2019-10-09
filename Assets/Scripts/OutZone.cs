@@ -19,7 +19,7 @@ public class OutZone : MonoBehaviour
         
     }
 
-    public void WallHit(Transform t)
+    public void WallHit(Collider2D collision)
     {
         if (transform.tag == "WallY")
         {
@@ -34,6 +34,6 @@ public class OutZone : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        WallHit(collision.transform);
+        WallHit(collision);
     }
 }

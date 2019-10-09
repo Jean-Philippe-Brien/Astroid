@@ -22,9 +22,9 @@ public class PlayerManager : IManager
     #endregion
     public void FirstInitialization()
     {
-        GameObject newPlayer = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Player"), GameLinks.gl.spawnPlayer);
-        player = newPlayer.GetComponent<Player>();
-        player.transform.position = GameLinks.gl.spawnPlayer.transform.position;
+        //GameObject newPlayer = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Player"), GameLinks.gl.spawnPlayer);
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //player.transform.position = GameLinks.gl.spawnPlayer.transform.position;
         player.FirstInitialization();
         
     }
