@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : IManager
 {
-    Player player;
+    public Player player;
     #region Singleton
     private static PlayerManager instance;
     private PlayerManager() { }

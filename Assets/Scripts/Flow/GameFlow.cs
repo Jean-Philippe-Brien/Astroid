@@ -22,6 +22,7 @@ public class GameFlow : IManager
     public void FirstInitialization()
     {
         GameLinks.gl = GameObject.FindObjectOfType<GameLinks>();
+        WorldManager.Instance.FirstInitialization();
         InputManager.Instance.FirstInitialization();
         PlayerManager.Instance.FirstInitialization();
     }
@@ -33,8 +34,11 @@ public class GameFlow : IManager
     }
     public void Refresh()
     {
+        
         InputManager.Instance.Refresh();
         PlayerManager.Instance.Refresh();
+        WorldManager.Instance.SetPlayerPosition(PlayerManager.Instance.player.transform);
+        WorldManager.Instance.Refresh();
     }
     public void PhysicsRefresh()
     {

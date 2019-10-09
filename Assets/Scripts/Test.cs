@@ -13,7 +13,7 @@ public class Test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Collider2D info = Physics2D.OverlapBox(transform.position, transform.GetComponent<SpriteRenderer>().bounds.size, 0, LayerMask.NameToLayer("Wall"));
+        Collider2D info = Physics2D.OverlapBox(transform.position, new Vector2(5,5), 0, LayerMask.GetMask("Wall"));
         if(info != null)
         {
             Debug.Log(info.transform.name);
