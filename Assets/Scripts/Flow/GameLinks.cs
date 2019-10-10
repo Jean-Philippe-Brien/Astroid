@@ -6,5 +6,5 @@ public class GameLinks : MonoBehaviour
 {
     public static GameLinks gl;
 
-    public Transform spawnPlayer;
+    public Transform player;
 }

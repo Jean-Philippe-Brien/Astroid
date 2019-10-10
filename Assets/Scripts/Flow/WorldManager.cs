@@ -21,10 +21,16 @@ public class WorldManager : IManager
     #endregion
     GameObject[] worldPlane;
     Transform player;
+    float planeX;
+    float planeY;
 
     public void FirstInitialization()
     {
         worldPlane = GameObject.FindGameObjectsWithTag("World");
+        planeX = worldPlane[0].transform.localScale.x * 10;
+        planeY = worldPlane[0].transform.localScale.z * 10;
+        Debug.Log(planeX);
+        Debug.Log(planeY);
     }
 
     public void PhysicsRefresh()
@@ -37,17 +43,17 @@ public class WorldManager : IManager
         Transform planeOn = null ;
         foreach(GameObject plane in worldPlane)
         {
-            if (player.position.x > plane.transform.position.x - 25 && player.position.x < plane.transform.position.x + 25)
+            if (player.position.x > plane.transform.position.x - (planeX / 2) && player.position.x < plane.transform.position.x + (planeX / 2))
             {
-                if (player.position.y > plane.transform.position.y - 15 && player.position.y < plane.transform.position.y + 15)
+                if (player.position.y > plane.transform.position.y - (planeY / 2) && player.position.y < plane.transform.position.y + (planeY / 2))
                 {
                     planeOn = plane.transform;
                     break;
                 }
             }
         }
-        Vector2 fakePointUp = new Vector2(planeOn.position.x + 50, planeOn.position.y + 30);
-        Vector2 fakePointDown = new Vector2(planeOn.position.x - 50, planeOn.position.y - 30);
+        Vector2 fakePointUp = new Vector2(planeOn.position.x + planeX, planeOn.position.y + planeY);
+        Vector2 fakePointDown = new Vector2(planeOn.position.x - planeX, planeOn.position.y - planeY);
         bool fillUp = true;
         bool fillDown = true;
         bool fillLeft = true;
@@ -55,21 +61,21 @@ public class WorldManager : IManager
         foreach (GameObject plane in worldPlane)
         {
             
-            if (fakePointUp.y > plane.transform.position.y - 15 && fakePointUp.y < plane.transform.position.y + 15)
+            if (fakePointUp.y > plane.transform.position.y - (planeY / 2) && fakePointUp.y < plane.transform.position.y + (planeY / 2))
             {
                 fillUp = false;
             }
-            else if (fakePointDown.y > plane.transform.position.y - 15 && fakePointDown.y < plane.transform.position.y + 15)
+            else if (fakePointDown.y > plane.transform.position.y - (planeY / 2) && fakePointDown.y < plane.transform.position.y + (planeY / 2))
             {
                 
                 fillDown = false;
             }
-            else if (fakePointUp.x > plane.transform.position.x - 15 && fakePointUp.x < plane.transform.position.x + 15)
+            else if (fakePointUp.x > plane.transform.position.x - (planeX / 2) && fakePointUp.x < plane.transform.position.x + (planeX / 2))
             {
 
                 fillLeft = false;
             }
-            else if (fakePointDown.x > plane.transform.position.x - 15 && fakePointDown.x < plane.transform.position.x + 15)
+            else if (fakePointDown.x > plane.transform.position.x - (planeX / 2) && fakePointDown.x < plane.transform.position.x + (planeX / 2))
             {
 
                 fillRight = false;
