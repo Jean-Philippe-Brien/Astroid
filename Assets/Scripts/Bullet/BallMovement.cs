@@ -12,8 +12,8 @@ public class BallMovement : MonoBehaviour
     void Start()
     {
 
-        timeBeforeDespawn = 1.3f;
-        speed = 20;
+        timeBeforeDespawn = 1.8f;
+        speed = 40;
     }
 
     // Update is called once per frame
@@ -22,12 +22,11 @@ public class BallMovement : MonoBehaviour
         CheckOutBounds();
         timeBeforeDespawn -= Time.deltaTime;
         Vector3 posTop = transform.position + (transform.up * (GetComponent<SpriteRenderer>().bounds.size.y / 2));        
-        Debug.DrawLine(posTop, posTop + (transform.up * Time.fixedDeltaTime * speed));
         RaycastHit2D hit = Physics2D.Raycast(posTop, transform.up, Time.fixedDeltaTime * speed, LayerMask.GetMask("Meteor"));
-        if (hit)
-            Debug.Log($"was hit: {hit.transform.name}");
         if (timeBeforeDespawn > 0)
+        {
             transform.Translate(Vector3.up * Time.fixedDeltaTime * speed);
+        }
         else
             GameObject.Destroy(gameObject);
         
@@ -41,10 +40,11 @@ public class BallMovement : MonoBehaviour
     {
         Vector2 newPos;
         float distance = Vector2.Distance(GameLinks.gl.player.position, transform.position);
-        if(distance >= 13)
+        Debug.Log(distance);
+        if(distance >= 18)
         {
 
-            newPos = RotatePoint(GameLinks.gl.player.transform.position.x, GameLinks.gl.player.transform.position.y, 180, GameLinks.gl.player.transform.position);
+            newPos = RotatePoint(GameLinks.gl.player.transform.position.x, GameLinks.gl.player.transform.position.y, 180, transform.position);
             transform.localPosition = new Vector3(newPos.x, newPos.y, 0);
         }
     }
