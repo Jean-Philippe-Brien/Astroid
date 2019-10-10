@@ -43,7 +43,6 @@ public class BallMovement : MonoBehaviour
         Debug.Log(distance);
         if(distance >= 18)
         {
-
             newPos = RotatePoint(GameLinks.gl.player.transform.position.x, GameLinks.gl.player.transform.position.y, 180, transform.position);
             transform.localPosition = new Vector3(newPos.x, newPos.y, 0);
         }
