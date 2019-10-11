@@ -32,7 +32,8 @@ public class BallMovement : MonoBehaviour
         
         if (hit.collider != null)
         {
-           // Debug.Log(hit.transform.name);
+            Destroy(hit.transform.gameObject);
+            Destroy(gameObject);
         }
         
     }
@@ -40,7 +41,6 @@ public class BallMovement : MonoBehaviour
     {
         Vector2 newPos;
         float distance = Vector2.Distance(GameLinks.gl.player.position, transform.position);
-        Debug.Log(distance);
         if(distance >= 18)
         {
             newPos = RotatePoint(GameLinks.gl.player.transform.position.x, GameLinks.gl.player.transform.position.y, 180, transform.position);
