@@ -27,7 +27,7 @@ public class Counter : MonoBehaviour
         }
         else
         {
-            if (GetComponent<Text>().enabled == true)
+            if (GetComponent<Text>().enabled)
                 GetComponent<Text>().enabled = false;
         }
     }

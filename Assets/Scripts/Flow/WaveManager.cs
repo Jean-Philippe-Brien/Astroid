@@ -2,33 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UiManager : IManager
+public class WaveManager : IManager
 {
     #region singleton
-    private static UiManager instance;
-    private UiManager() { }
-    public static UiManager Instance
+    private static WaveManager instance;
+    private WaveManager() { }
+    public static WaveManager Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new UiManager();
+                instance = new WaveManager();
             }
             return instance;
         }
     }
     #endregion
 
-    public Counter counterField;
+
+
     public void FirstInitialization()
     {
-        counterField = GameObject.FindGameObjectWithTag("Counter").GetComponent<Counter>();
     }
-    public void SetCoolDown(int coolDown)
-    {
-        counterField.SetCoolDown(coolDown);
-    }
+
     public void PhysicsRefresh()
     {
         throw new System.NotImplementedException();
@@ -36,11 +33,16 @@ public class UiManager : IManager
 
     public void Refresh()
     {
-        
+        throw new System.NotImplementedException();
     }
 
     public void SecondInitialization()
     {
         throw new System.NotImplementedException();
     }
+    void SpawnAsteroids()
+    {
+
+    }
+
 }

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 [ExecuteInEditMode]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PolygonCollider2D))]
+[RequireComponent(typeof(MeshFilter))]
+[RequireComponent(typeof(MeshRenderer))]
 public class Asteroid : MonoBehaviour, IManager
 {
     Mesh mesh;
@@ -17,9 +21,20 @@ public class Asteroid : MonoBehaviour, IManager
     PolygonCollider2D edgeCol2D;
     Rigidbody2D rb;
 
-    public void FirstInitialize(float size)
+    void Start()
     {
-        
+        mesh = new Mesh();
+        seed = Random.Range(0, 20f);
+
+        edgeCol2D = GetComponentInChildren<PolygonCollider2D>();
+        lineRend = GetComponentInChildren<LineRenderer>();
+        rb = GetComponentInChildren<Rigidbody2D>();
+        GetComponentInChildren<MeshFilter>().mesh = mesh;
+
+        lineRend.loop = true;
+        CreateShape();
+        UpdateMesh();
+        Move();
     }
 
     void Move()
@@ -81,33 +96,21 @@ public class Asteroid : MonoBehaviour, IManager
         mesh.RecalculateNormals();
     }
 
-    public void FirstInitialization()
-    {
-        mesh = new Mesh();
-        seed = Random.Range(0, 20f);
-
-        edgeCol2D = GetComponentInChildren<PolygonCollider2D>();
-        lineRend = GetComponentInChildren<LineRenderer>();
-        rb = GetComponentInChildren<Rigidbody2D>();
-        GetComponentInChildren<MeshFilter>().mesh = mesh;
-
-        lineRend.loop = true;
-        CreateShape();
-        UpdateMesh();
-        Move();
-    }
+    
 
     public void SecondInitialization()
     {
-        throw new System.NotImplementedException();
     }
 
     public void Refresh()
     {
-        throw new System.NotImplementedException();
     }
 
     public void PhysicsRefresh()
+    {
+    }
+
+    public void FirstInitialization()
     {
         throw new System.NotImplementedException();
     }
