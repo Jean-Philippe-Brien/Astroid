@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UiManager : IManager
 {
@@ -20,19 +19,16 @@ public class UiManager : IManager
         }
     }
     #endregion
-    int timeCoolDown = 0;
-    Text CpCoolDown;
-    float coolDown;
 
-    public void SetCoolDown(int coolDown)
-    {
-        this.coolDown = coolDown;
-    }
+    Counter counterField;
     public void FirstInitialization()
     {
-        CpCoolDown = GameObject.FindGameObjectWithTag("Counter").GetComponent<Text>();
+        counterField = GameObject.FindGameObjectWithTag("Counter").GetComponent<Counter>();
     }
-
+    public void SetCoolDown(int coolDown)
+    {
+        counterField.SetCoolDown(coolDown);
+    }
     public void PhysicsRefresh()
     {
         throw new System.NotImplementedException();
@@ -40,20 +36,7 @@ public class UiManager : IManager
 
     public void Refresh()
     {
-        if(coolDown > 0)
-        {
-            coolDown -= Time.deltaTime;
-            if((int)coolDown != timeCoolDown)
-            {
-                timeCoolDown = (int)coolDown + 1;
-                CpCoolDown.text = timeCoolDown.ToString();
-            }
-        }
-        else
-        {
-            if (CpCoolDown.enabled == true)
-                CpCoolDown.enabled = false;
-        }
+        
     }
 
     public void SecondInitialization()

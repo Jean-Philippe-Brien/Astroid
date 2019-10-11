@@ -24,12 +24,13 @@ public class GameFlow : IManager
     float TimeBeforeStart = 3;
     public void FirstInitialization()
     {
-        UiManager.Instance.FirstInitialization();
         GameLinks.gl = GameObject.FindObjectOfType<GameLinks>();
+        UiManager.Instance.FirstInitialization();
+        UiManager.Instance.SetCoolDown(3);
         WorldManager.Instance.FirstInitialization();
         InputManager.Instance.FirstInitialization();
         PlayerManager.Instance.FirstInitialization();
-        UiManager.Instance.SetCoolDown(3);
+        //UiManager.Instance.SetCoolDown(3);
     }
     //like start func
     public void SecondInitialization()
