@@ -27,6 +27,7 @@ public class GameFlow : IManager
         GameLinks.gl = GameObject.FindObjectOfType<GameLinks>();
         UiManager.Instance.FirstInitialization();
         UiManager.Instance.SetCoolDown(3);
+        WaveManager.Instance.FirstInitialization();
         WorldManager.Instance.FirstInitialization();
         InputManager.Instance.FirstInitialization();
         PlayerManager.Instance.FirstInitialization();
