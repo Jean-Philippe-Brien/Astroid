@@ -14,7 +14,7 @@ public class Counter : MonoBehaviour
         this.coolDown = coolDown;
         GetComponent<Text>().enabled = true;
     }
-    void UpdateText()
+    void Update()
     {
         if (coolDown > 0)
         {
