@@ -8,6 +8,7 @@ TagManager:
   - WallY
   - Meteor
   - World
+  - Counter
   layers:
   - Default
   - TransparentFX

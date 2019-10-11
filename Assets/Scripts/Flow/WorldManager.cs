@@ -29,8 +29,6 @@ public class WorldManager : IManager
         worldPlane = GameObject.FindGameObjectsWithTag("World");
         planeX = worldPlane[0].transform.localScale.x * 10;
         planeY = worldPlane[0].transform.localScale.z * 10;
-        Debug.Log(planeX);
-        Debug.Log(planeY);
     }
 
     public void PhysicsRefresh()
