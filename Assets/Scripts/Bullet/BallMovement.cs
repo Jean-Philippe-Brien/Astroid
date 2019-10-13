@@ -32,7 +32,7 @@ public class BallMovement : MonoBehaviour
         
         if (hit.collider != null)
         {
-            Destroy(hit.transform.gameObject);
+            hit.transform.GetComponent<Rigidbody2D>().AddForce(transform.up * 3, ForceMode2D.Impulse);
             Destroy(gameObject);
         }
         
