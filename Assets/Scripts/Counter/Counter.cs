@@ -28,7 +28,10 @@ public class Counter : MonoBehaviour
         else
         {
             if (GetComponent<Text>().enabled)
+            {
                 GetComponent<Text>().enabled = false;
+                WaveManager.Instance.waveStart = true;
+            }
         }
     }
 }

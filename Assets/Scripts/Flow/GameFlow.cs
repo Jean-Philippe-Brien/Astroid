@@ -26,11 +26,12 @@ public class GameFlow : IManager
     {
         GameLinks.gl = GameObject.FindObjectOfType<GameLinks>();
         UiManager.Instance.FirstInitialization();
-        UiManager.Instance.SetCoolDown(3);
+        //UiManager.Instance.SetCoolDown(3);
         WaveManager.Instance.FirstInitialization();
         WorldManager.Instance.FirstInitialization();
         InputManager.Instance.FirstInitialization();
         PlayerManager.Instance.FirstInitialization();
+        WaveManager.Instance.FirstInitialization();
         //UiManager.Instance.SetCoolDown(3);
     }
     //like start func
@@ -46,6 +47,7 @@ public class GameFlow : IManager
         PlayerManager.Instance.Refresh();
         WorldManager.Instance.SetPlayerPosition(PlayerManager.Instance.player.transform);
         WorldManager.Instance.Refresh();
+        WaveManager.Instance.Refresh();
         
     }
     public void PhysicsRefresh()

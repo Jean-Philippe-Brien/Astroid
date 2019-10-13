@@ -16,13 +16,14 @@ public class Asteroid : MonoBehaviour, IManager
     int nbCorner;
     float rangeAngle;
     float seed;
-    public float size = 5f;
+    float size;
     LineRenderer lineRend;
     PolygonCollider2D edgeCol2D;
     Rigidbody2D rb;
 
     void Start()
     {
+        size = Random.Range(50000f, 100000f);
         mesh = new Mesh();
         seed = Random.Range(0, 20f);
 
