@@ -1065,6 +1065,7 @@ GameObject:
   - component: {fileID: 936599177}
   - component: {fileID: 936599176}
   - component: {fileID: 936599178}
+  - component: {fileID: 936599179}
   m_Layer: 0
   m_Name: GameFlow
   m_TagString: Untagged
@@ -1112,6 +1113,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1805010668}
   counter: {fileID: 409273988}
+--- !u!114 &936599179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936599175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328ae106c8a2afe44bb682ea3672dc20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &994873169
 GameObject:
   m_ObjectHideFlags: 0

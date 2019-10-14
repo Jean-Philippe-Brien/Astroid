@@ -32,7 +32,8 @@ public class BallMovement : MonoBehaviour
         
         if (hit.collider != null)
         {
-            hit.transform.GetComponent<Rigidbody2D>().AddForce(transform.up * 3, ForceMode2D.Impulse);
+            Destroy(hit.transform.gameObject);
+            WaveManager.Instance.numAsteroid--;
             Destroy(gameObject);
         }
         

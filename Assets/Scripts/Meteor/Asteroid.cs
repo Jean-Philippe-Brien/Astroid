@@ -40,7 +40,7 @@ public class Asteroid : MonoBehaviour, IManager
 
     void Move()
     {
-        rb.AddForce(Random.insideUnitCircle * Random.Range(0.1f, 20f));
+        rb.AddForce(Random.insideUnitCircle * Random.Range(3f, 10f), ForceMode2D.Impulse);
     }
     void CreateShape()
     {
@@ -102,9 +102,40 @@ public class Asteroid : MonoBehaviour, IManager
     public void SecondInitialization()
     {
     }
-
-    public void Refresh()
+    public void verifyDistanceToPlayer(Vector2 posPlayer)
     {
+        float distanceFromPlayer = Vector2.Distance(transform.position, posPlayer);
+        if(distanceFromPlayer > 50)
+        {
+            transform.position = RotatePoint(posPlayer, 180, transform.position);
+            Vector2 heading = (Vector2)transform.position - posPlayer;
+            float distance = heading.magnitude;
+            Vector2 direction = heading / distance; // This is now the normalized direction.
+            transform.position -= (Vector3)direction;
+        }
+    }
+    public static Vector2 RotatePoint(Vector2 centerPoint, float DegAngle, Vector2 p)
+    {
+        float cx = centerPoint.x;
+        float cy = centerPoint.y;
+        float angle = (DegAngle) * Mathf.PI / 180;
+        float s = Mathf.Sin(angle);
+        float c = Mathf.Cos(angle);
+        p.x -= cx;
+        p.y -= cy;
+        float xnew = p.x * c - p.y * s;
+        float ynew = p.x * s + p.y * c;
+        p.x = xnew + cx;
+        p.y = ynew + cy;
+        return p;
+    }
+    public void Update()
+    {
+        /*Collider2D hit = Physics2D.OverlapCircle(transform.position, 10, LayerMask.GetMask("Meteor"));
+        if(hit != null)
+        {
+            Debug.Log(hit.transform.tag);
+        }*/
     }
 
     public void PhysicsRefresh()
@@ -114,5 +145,14 @@ public class Asteroid : MonoBehaviour, IManager
     public void FirstInitialization()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void Refresh()
+    {
+        throw new System.NotImplementedException();
+    }
+    private void OnDestroy()
+    {
+        //WaveManager.Instance.asteroids.RemoveAt();
     }
 }

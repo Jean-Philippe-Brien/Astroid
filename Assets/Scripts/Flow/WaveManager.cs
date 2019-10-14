@@ -22,15 +22,20 @@ public class WaveManager : IManager
 
     int waveCount;
     int meteorCount;
-    int waveSize;
+    float waveSize;
+    float waveSizeCounter;
+    public int numAsteroid = 0;
+    bool waveOnPlay = false;
     float distanceSpawn;
     float distanceTeleport;
     public bool waveStart;
     Transform playerPos;
     GameObject asteroid;
+    public List<Asteroid> asteroids = new List<Asteroid>();
 
     public void FirstInitialization()
     {
+        
         waveStart = false;
         waveSize = 50;
         waveCount = 1;
@@ -50,8 +55,24 @@ public class WaveManager : IManager
     {
         if(waveStart)
         {
+            waveSizeCounter = waveSize;
             waveStart = false;
+            waveOnPlay = true;
             SpawnAsteroids();
+        }
+        foreach(Asteroid instanceAsteroid in asteroids)
+        {
+            if(instanceAsteroid != null)
+                instanceAsteroid.verifyDistanceToPlayer(playerPos.position);
+        }
+        if(numAsteroid == 0 && waveOnPlay)
+        {
+            waveOnPlay = false;
+            Debug.Log("wave " + waveCount + " terminer");
+            waveCount++;
+            waveSize = (waveSize * 1.3f) + (waveCount * 0.05f);
+            Debug.Log("wave " + waveCount + " begin size " + waveSize);
+            GameLinks.gl.counter.GetComponent<Counter>().SetCoolDown(5);
         }
     }
 
@@ -61,14 +82,14 @@ public class WaveManager : IManager
     }
     void SpawnAsteroids()
     {
-        while (waveSize > 0)
+        numAsteroid = 0;
+        while (waveSizeCounter > 0)
         {
 
-            waveSize -= 10;
-            GameObject newAsteroid = GameObject.Instantiate(asteroid);
-            //newAsteroid.GetComponent<Asteroid>().size = Random.Range(50f, 100f);
-            Debug.Log("bob");
+            waveSizeCounter -= 7;
+            CoroutineSpawnAsteroid.SpawnAsteroid(asteroid, numAsteroid);
+            numAsteroid++;
         }
     }
-
+    
 }
