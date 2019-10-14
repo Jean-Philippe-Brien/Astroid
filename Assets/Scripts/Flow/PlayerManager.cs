@@ -36,6 +36,10 @@ public class PlayerManager : IManager
     {
         SceneManager.LoadScene(0);
     }
+    public void setCanFire()
+    {
+        player.canShoot = true;
+    }
     public void PhysicsRefresh()
     {
         player.PhysicsRefresh(InputManager.Instance.physicsInputPkg);

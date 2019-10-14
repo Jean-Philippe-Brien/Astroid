@@ -42,6 +42,7 @@ public class Counter : MonoBehaviour
                     WaveManager.Instance.waveStart = true;
                 else if (typeCoolDown == 1)
                     PlayerManager.Instance.RespawnPlayer();
+                PlayerManager.Instance.setCanFire();
             }
         }
     }

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     float rotationSpeed;
     float counterBetweenFire;
     bool canFire;
+    public bool canShoot;
     GameObject bullet;
     public float speed = 5;
     public float timeBetweenFire;
@@ -18,33 +19,37 @@ public class Player : MonoBehaviour
     {
         bullet = Resources.Load<GameObject>("Prefabs/Bullet");
         rbPlayer = GetComponent<Rigidbody2D>();
-        rotationSpeed = 100.5f;
+        rotationSpeed = 150.5f;
         canFire = true;
+        canShoot = false;
         counterBetweenFire = timeBetweenFire;
     }
     public void Refresh(InputManager.InputPkg inputPck)
     {
         if (live > 0)
         {
-            if (canFire)
+            if (canShoot)
             {
-                if (inputPck.fire)
+                if (canFire)
                 {
-                    GameObject ball = GameObject.Instantiate(bullet, transform.position + transform.up * 1, Quaternion.identity, transform.parent);
-                    ball.transform.eulerAngles = transform.eulerAngles;
-                    canFire = false;
-                }
-            }
-            else
-            {
-
-                if (counterBetweenFire <= 0)
-                {
-                    canFire = true;
-                    counterBetweenFire = timeBetweenFire;
+                    if (inputPck.fire)
+                    {
+                        GameObject ball = GameObject.Instantiate(bullet, transform.position + transform.up * 1, Quaternion.identity, transform.parent);
+                        ball.transform.eulerAngles = transform.eulerAngles;
+                        canFire = false;
+                    }
                 }
                 else
-                    counterBetweenFire -= Time.deltaTime;
+                {
+
+                    if (counterBetweenFire <= 0)
+                    {
+                        canFire = true;
+                        counterBetweenFire = timeBetweenFire;
+                    }
+                    else
+                        counterBetweenFire -= Time.deltaTime;
+                }
             }
         }
         else
@@ -68,6 +73,7 @@ public class Player : MonoBehaviour
             UiManager.Instance.SetCoolDownRespawn(3);
             live--;
             UiManager.Instance.SetLiveCounter(live);
+            canShoot = false;
             gameObject.SetActive(false);
         }
     }
