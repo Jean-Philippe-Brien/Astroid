@@ -153,6 +153,6 @@ public class Asteroid : MonoBehaviour, IManager
     }
     private void OnDestroy()
     {
-        //WaveManager.Instance.asteroids.RemoveAt();
+        
     }
 }

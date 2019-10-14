@@ -21,8 +21,8 @@ public class BallMovement : MonoBehaviour
     {
         CheckOutBounds();
         timeBeforeDespawn -= Time.deltaTime;
-        Vector3 posTop = transform.position + (transform.up * (GetComponent<SpriteRenderer>().bounds.size.y / 2));        
-        RaycastHit2D hit = Physics2D.Raycast(posTop, transform.up, Time.fixedDeltaTime * speed, LayerMask.GetMask("Meteor"));
+        Vector3 posDown = transform.position - (transform.up * (GetComponent<SpriteRenderer>().bounds.size.y / 2));        
+        RaycastHit2D hit = Physics2D.Raycast(posDown, transform.up, Time.fixedDeltaTime * speed, LayerMask.GetMask("Meteor"));
         if (timeBeforeDespawn > 0)
         {
             transform.Translate(Vector3.up * Time.fixedDeltaTime * speed);
@@ -32,8 +32,12 @@ public class BallMovement : MonoBehaviour
         
         if (hit.collider != null)
         {
+            GameObject.Instantiate(GameLinks.gl.explosion, hit.transform.position + new Vector3(0,0,-1), Quaternion.identity);
+            GameLinks.gl.explosion.GetComponent<ParticleSystem>().Play();
+            
             Destroy(hit.transform.gameObject);
             WaveManager.Instance.numAsteroid--;
+            UiManager.Instance.SetAsteroidCounter(WaveManager.Instance.numAsteroid);
             Destroy(gameObject);
         }
         

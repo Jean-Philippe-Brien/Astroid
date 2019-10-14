@@ -6,7 +6,6 @@ public class MainEntry : MonoBehaviour
 {
     private void Awake()
     {
-        Object.DontDestroyOnLoad(gameObject);
         GameFlow.Instance.FirstInitialization();
         
     }

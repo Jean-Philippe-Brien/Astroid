@@ -9,10 +9,13 @@ public class Counter : MonoBehaviour
     int timeCoolDown = 0;
     Text CpCoolDown;
     float coolDown;
-    public void SetCoolDown(int coolDown)
+    int typeCoolDown;
+    public void SetCoolDown(int coolDown, int type)
     {
         this.coolDown = coolDown;
         GetComponent<Text>().enabled = true;
+        transform.GetChild(0).GetComponent<Text>().enabled = true;
+        typeCoolDown = type;
     }
     void Update()
     {
@@ -23,6 +26,10 @@ public class Counter : MonoBehaviour
             {
                 timeCoolDown = (int)coolDown + 1;
                 GetComponent<Text>().text = timeCoolDown.ToString();
+                if (typeCoolDown == 0)
+                    transform.GetChild(0).GetComponent<Text>().text = "wave start in";
+                else if (typeCoolDown == 1)
+                    transform.GetChild(0).GetComponent<Text>().text = "Respawn in";
             }
         }
         else
@@ -30,7 +37,11 @@ public class Counter : MonoBehaviour
             if (GetComponent<Text>().enabled)
             {
                 GetComponent<Text>().enabled = false;
-                WaveManager.Instance.waveStart = true;
+                transform.GetChild(0).GetComponent<Text>().enabled = false;
+                if (typeCoolDown == 0)
+                    WaveManager.Instance.waveStart = true;
+                else if (typeCoolDown == 1)
+                    PlayerManager.Instance.RespawnPlayer();
             }
         }
     }

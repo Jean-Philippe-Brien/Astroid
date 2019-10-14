@@ -10,4 +10,10 @@ public class GameLinks : MonoBehaviour
     public Transform player;
 
     public Text counter;
+
+    public GameObject explosion;
+    private void Awake()
+    {
+        explosion = Resources.Load<GameObject>("Prefabs/Explosion");
+    }
 }

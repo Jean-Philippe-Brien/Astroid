@@ -9,6 +9,10 @@ TagManager:
   - Meteor
   - World
   - Counter
+  - WaveCounter
+  - Explosion
+  - AsteroidCounter
+  - LiveCounter
   layers:
   - Default
   - TransparentFX

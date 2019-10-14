@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerManager : IManager
 {
     public Player player;
@@ -28,7 +28,14 @@ public class PlayerManager : IManager
         player.FirstInitialization();
         
     }
-
+    public void RespawnPlayer()
+    {
+        player.gameObject.SetActive(true);
+    }
+    public void playerDeath()
+    {
+        SceneManager.LoadScene(0);
+    }
     public void PhysicsRefresh()
     {
         player.PhysicsRefresh(InputManager.Instance.physicsInputPkg);

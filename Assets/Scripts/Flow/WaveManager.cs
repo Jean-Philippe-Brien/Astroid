@@ -42,7 +42,7 @@ public class WaveManager : IManager
         distanceSpawn = 50;
         distanceTeleport = 60;
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
-        GameLinks.gl.counter.GetComponent<Counter>().SetCoolDown(3);
+        UiManager.Instance.SetCoolDown(3);
         asteroid = Resources.Load<GameObject>("Prefabs/Asteroid");
     }
 
@@ -68,12 +68,12 @@ public class WaveManager : IManager
         if(numAsteroid == 0 && waveOnPlay)
         {
             waveOnPlay = false;
-            Debug.Log("wave " + waveCount + " terminer");
             waveCount++;
             waveSize = (waveSize * 1.3f) + (waveCount * 0.05f);
             Debug.Log("wave " + waveCount + " begin size " + waveSize);
             asteroids.Clear();
-            GameLinks.gl.counter.GetComponent<Counter>().SetCoolDown(5);
+            UiManager.Instance.SetWaveCounter(waveCount);
+            UiManager.Instance.SetCoolDown(5);
         }
     }
 
@@ -91,6 +91,7 @@ public class WaveManager : IManager
             CoroutineSpawnAsteroid.SpawnAsteroid(asteroid, numAsteroid);
             numAsteroid++;
         }
+        UiManager.Instance.SetAsteroidCounter(numAsteroid);
     }
     
 }
