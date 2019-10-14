@@ -72,6 +72,7 @@ public class WaveManager : IManager
             waveCount++;
             waveSize = (waveSize * 1.3f) + (waveCount * 0.05f);
             Debug.Log("wave " + waveCount + " begin size " + waveSize);
+            asteroids.Clear();
             GameLinks.gl.counter.GetComponent<Counter>().SetCoolDown(5);
         }
     }

@@ -105,7 +105,7 @@ public class Asteroid : MonoBehaviour, IManager
     public void verifyDistanceToPlayer(Vector2 posPlayer)
     {
         float distanceFromPlayer = Vector2.Distance(transform.position, posPlayer);
-        if(distanceFromPlayer > 50)
+        if(distanceFromPlayer > 22)
         {
             transform.position = RotatePoint(posPlayer, 180, transform.position);
             Vector2 heading = (Vector2)transform.position - posPlayer;

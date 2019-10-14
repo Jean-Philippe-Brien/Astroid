@@ -21,7 +21,7 @@ public class CoroutineSpawnAsteroid : MonoBehaviour
         yield return new WaitForSeconds(waitStart);
         do
         {
-            Vector2 rotatePoint = RotatePoint(Random.Range(0f, 360f), 40);
+            Vector2 rotatePoint = RotatePoint(Random.Range(0f, 360f), 20);
             hit = Physics2D.OverlapCircle(rotatePoint, 5, LayerMask.GetMask("Meteor"));
             if (hit == null)
             {
