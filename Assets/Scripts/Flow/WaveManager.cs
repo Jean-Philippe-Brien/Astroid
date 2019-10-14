@@ -69,7 +69,7 @@ public class WaveManager : IManager
         {
             waveOnPlay = false;
             waveCount++;
-            waveSize = (waveSize * 1.3f) + (waveCount * 0.05f);
+            waveSize = waveSize * (1.3f + waveCount * Random.Range(0.05f, 0.15f));
             Debug.Log("wave " + waveCount + " begin size " + waveSize);
             asteroids.Clear();
             UiManager.Instance.SetWaveCounter(waveCount);
@@ -87,7 +87,7 @@ public class WaveManager : IManager
         while (waveSizeCounter > 0)
         {
 
-            waveSizeCounter -= 7;
+            waveSizeCounter -= Random.Range(4,8);
             CoroutineSpawnAsteroid.SpawnAsteroid(asteroid, numAsteroid);
             numAsteroid++;
         }
