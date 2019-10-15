@@ -6,14 +6,12 @@ public class MeteorMovement : MonoBehaviour
 {
     Rigidbody2D rbMeteor;
     Vector2 movement;
-    float rotationSpeed;
     float speed;
     float timeWhithSameForce;
     void Start()
     {
         rbMeteor = GetComponent<Rigidbody2D>();
         speed = Random.Range(0.5f, 5f);
-        rotationSpeed = 1;
         timeWhithSameForce = 0;
     }
 

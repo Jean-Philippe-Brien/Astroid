@@ -19,43 +19,41 @@ public class GameFlow : IManager
     }
     #endregion
     //like awake func
-    bool menuOn = true;
     bool isPaused = false;
-    float TimeBeforeStart = 3;
     public void FirstInitialization()
     {
+        UiManager.Instance.SecondInitialization();
         GameLinks.gl = GameObject.FindObjectOfType<GameLinks>();
-        UiManager.Instance.FirstInitialization();
-        //UiManager.Instance.SetCoolDown(3);
-        WaveManager.Instance.FirstInitialization();
         WorldManager.Instance.FirstInitialization();
         InputManager.Instance.FirstInitialization();
         PlayerManager.Instance.FirstInitialization();
-        WaveManager.Instance.FirstInitialization();
-        //UiManager.Instance.SetCoolDown(3);
+        
+        
     }
     //like start func
     public void SecondInitialization()
     {
+
+        WaveManager.Instance.SecondInitialization();
         InputManager.Instance.SecondInitialization();
         PlayerManager.Instance.SecondInitialization();
     }
     public void Refresh()
     {
-        UiManager.Instance.Refresh();
+        
         InputManager.Instance.Refresh();
         PlayerManager.Instance.Refresh();
         WorldManager.Instance.SetPlayerPosition(PlayerManager.Instance.player.transform);
         WorldManager.Instance.Refresh();
+        UiManager.Instance.Refresh();
         WaveManager.Instance.Refresh();
         
+
     }
     public void PhysicsRefresh()
     {
-        if (!isPaused)
-        {
-            InputManager.Instance.PhysicsRefresh();
-            PlayerManager.Instance.PhysicsRefresh();
-        }
+        InputManager.Instance.PhysicsRefresh();
+        PlayerManager.Instance.PhysicsRefresh();
+        
     }
 }

@@ -108,7 +108,6 @@ public class WorldManager : IManager
     private void moveDownToUp(Transform planeOn)
     {
         //Vector2 fakePoint = new Vector2(planeOn.position.x + 50, planeOn.position.y + 30);
-        bool PlaneToSwitch;
         Vector2 fakePoint = new Vector2(planeOn.transform.position.x, planeOn.transform.position.y - (30 * 2));
         foreach (GameObject plane in worldPlane)
         {
@@ -123,7 +122,6 @@ public class WorldManager : IManager
     private void moveUpToDown(Transform planeOn)
     {
         //Vector2 fakePoint = new Vector2(planeOn.position.x + 50, planeOn.position.y + 30);
-        bool PlaneToSwitch;
         Vector2 fakePoint = new Vector2(planeOn.transform.position.x, planeOn.transform.position.y + (30 * 2));
         foreach (GameObject plane in worldPlane)
         {
@@ -138,7 +136,6 @@ public class WorldManager : IManager
     private void moveRightToLeft(Transform planeOn)
     {
         //Vector2 fakePoint = new Vector2(planeOn.position.x + 50, planeOn.position.y + 30);
-        bool PlaneToSwitch;
         Vector2 fakePoint = new Vector2(planeOn.transform.position.x - (50 * 2), planeOn.transform.position.y);
         foreach (GameObject plane in worldPlane)
         {
@@ -154,7 +151,6 @@ public class WorldManager : IManager
     private void moveLeftToRight(Transform planeOn)
     {
         //Vector2 fakePoint = new Vector2(planeOn.position.x + 50, planeOn.position.y + 30);
-        bool PlaneToSwitch;
         Vector2 fakePoint = new Vector2(planeOn.transform.position.x + (50 * 2), planeOn.transform.position.y);
         foreach (GameObject plane in worldPlane)
         {

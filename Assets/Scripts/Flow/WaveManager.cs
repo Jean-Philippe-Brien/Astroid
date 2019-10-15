@@ -26,8 +26,6 @@ public class WaveManager : IManager
     float waveSizeCounter;
     public int numAsteroid = 0;
     bool waveOnPlay = false;
-    float distanceSpawn;
-    float distanceTeleport;
     public bool waveStart;
     Transform playerPos;
     GameObject asteroid;
@@ -36,14 +34,7 @@ public class WaveManager : IManager
     public void FirstInitialization()
     {
         
-        waveStart = false;
-        waveSize = 50;
-        waveCount = 1;
-        distanceSpawn = 50;
-        distanceTeleport = 60;
-        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
-        UiManager.Instance.SetCoolDown(3);
-        asteroid = Resources.Load<GameObject>("Prefabs/Asteroid");
+        
     }
 
     public void PhysicsRefresh()
@@ -72,6 +63,7 @@ public class WaveManager : IManager
             waveSize = waveSize * (1.3f + waveCount * Random.Range(0.05f, 0.15f));
             Debug.Log("wave " + waveCount + " begin size " + waveSize);
             asteroids.Clear();
+            PlayerManager.Instance.setCanFire();
             UiManager.Instance.SetWaveCounter(waveCount);
             UiManager.Instance.SetCoolDown(5);
         }
@@ -79,7 +71,12 @@ public class WaveManager : IManager
 
     public void SecondInitialization()
     {
-        
+        waveStart = false;
+        waveSize = 5000;
+        waveCount = 1;
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        UiManager.Instance.SetCoolDown(3);
+        asteroid = Resources.Load<GameObject>("Prefabs/Asteroid");
     }
     void SpawnAsteroids()
     {

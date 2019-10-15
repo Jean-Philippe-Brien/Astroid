@@ -28,11 +28,7 @@ public class UiManager : IManager
     public Text liveCounter;
     public void FirstInitialization()
     {
-        counterField = GameObject.FindGameObjectWithTag("Counter").GetComponent<Counter>();
-        waveCounter = GameObject.FindGameObjectWithTag("WaveCounter").GetComponent<Text>();
-        asteroidCounter = GameObject.FindGameObjectWithTag("AsteroidCounter").GetComponent<Text>();
-        asteroidCounter = GameObject.FindGameObjectWithTag("AsteroidCounter").GetComponent<Text>();
-        liveCounter = GameObject.FindGameObjectWithTag("LiveCounter").GetComponent<Text>();
+        
     }
     public void SetCoolDown(int coolDown)
     {
@@ -66,6 +62,10 @@ public class UiManager : IManager
 
     public void SecondInitialization()
     {
-        throw new System.NotImplementedException();
+        counterField = GameObject.FindGameObjectWithTag("Counter").GetComponent<Counter>();
+
+        asteroidCounter = GameObject.FindGameObjectWithTag("AsteroidCounter").GetComponent<Text>();
+        liveCounter = GameObject.FindGameObjectWithTag("LiveCounter").GetComponent<Text>();
+        waveCounter = GameObject.FindGameObjectWithTag("WaveCounter").GetComponent<Text>();
     }
 }
