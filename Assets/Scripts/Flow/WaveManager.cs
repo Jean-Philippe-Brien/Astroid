@@ -85,12 +85,34 @@ public class WaveManager : IManager
         numAsteroid = 0;
         while (waveSizeCounter > 0)
         {
-            float size = Random.Range(2f, 8f * waveCount);
+            float size = Random.Range(4f, 8f);
+            if((int)( size / 3) >= 2)
+            {
+                numAsteroid += 4;
+            }
+            else if((int)(size / 2) >= 2)
+            {
+                numAsteroid += 3;
+            }
+            else
+            {
+                numAsteroid++;
+            }
             waveSizeCounter -= size;
             CoroutineSpawnAsteroid.SpawnAsteroid(asteroid, numAsteroid, size);
-            numAsteroid++;
+            //numAsteroid++;
         }
         UiManager.Instance.SetAsteroidCounter(numAsteroid);
+    }
+    public void CheckIfAsteroidHaveChild(Transform asteroid)
+    {
+        for (int i = 0; i < asteroid.GetComponent<Asteroid>().subDivision; i++)
+        {
+            GameObject newAsteroid = GameObject.Instantiate(this.asteroid);
+            newAsteroid.GetComponent<Asteroid>().FirstInitialization(2);
+            newAsteroid.transform.position = asteroid.position + new Vector3(Random.Range(0.5f,1f), Random.Range(0.5f, 1f), 0);
+            WaveManager.Instance.asteroids.Add(newAsteroid.GetComponent<Asteroid>());
+        }
     }
     
 }
