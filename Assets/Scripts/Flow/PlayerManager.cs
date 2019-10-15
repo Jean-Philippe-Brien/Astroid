@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PlayerManager : IManager
 {
     public Player player;
+    public bool isAlive;
     #region Singleton
     private static PlayerManager instance;
     private PlayerManager() { }
@@ -24,6 +25,7 @@ public class PlayerManager : IManager
     {
         //GameObject newPlayer = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Player"), GameLinks.gl.spawnPlayer);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        isAlive = true;
         //player.transform.position = GameLinks.gl.spawnPlayer.transform.position;
         player.FirstInitialization();
         
@@ -34,7 +36,7 @@ public class PlayerManager : IManager
     }
     public void playerDeath()
     {
-        SceneManager.LoadScene(0);
+
     }
     public void setCanFire()
     {

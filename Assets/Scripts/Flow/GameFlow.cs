@@ -22,7 +22,7 @@ public class GameFlow : IManager
     bool isPaused = false;
     public void FirstInitialization()
     {
-        UiManager.Instance.SecondInitialization();
+        UiManager.Instance.FirstInitialization();
         GameLinks.gl = GameObject.FindObjectOfType<GameLinks>();
         WorldManager.Instance.FirstInitialization();
         InputManager.Instance.FirstInitialization();
@@ -33,6 +33,7 @@ public class GameFlow : IManager
     //like start func
     public void SecondInitialization()
     {
+        UiManager.Instance.SecondInitialization();
 
         WaveManager.Instance.SecondInitialization();
         InputManager.Instance.SecondInitialization();

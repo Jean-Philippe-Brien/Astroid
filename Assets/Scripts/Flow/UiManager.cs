@@ -26,9 +26,12 @@ public class UiManager : IManager
     public Text waveCounter;
     public Text asteroidCounter;
     public Text liveCounter;
+    public GameObject gameOverPanel;
     public void FirstInitialization()
     {
-        
+        gameOverPanel = GameObject.FindGameObjectWithTag("GameOver");
+        gameOverPanel.SetActive(false);
+
     }
     public void SetCoolDown(int coolDown)
     {

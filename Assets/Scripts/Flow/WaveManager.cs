@@ -44,28 +44,30 @@ public class WaveManager : IManager
 
     public void Refresh()
     {
-        if(waveStart)
-        {
-            waveSizeCounter = waveSize;
-            waveStart = false;
-            waveOnPlay = true;
-            SpawnAsteroids();
-        }
-        foreach(Asteroid instanceAsteroid in asteroids)
-        {
-            if(instanceAsteroid != null)
-                instanceAsteroid.verifyDistanceToPlayer(playerPos.position);
-        }
-        if(numAsteroid == 0 && waveOnPlay)
-        {
-            waveOnPlay = false;
-            waveCount++;
-            waveSize = waveSize * (1.3f + waveCount * Random.Range(0.05f, 0.15f));
-            Debug.Log("wave " + waveCount + " begin size " + waveSize);
-            asteroids.Clear();
-            PlayerManager.Instance.setCanFire();
-            UiManager.Instance.SetWaveCounter(waveCount);
-            UiManager.Instance.SetCoolDown(5);
+        if (PlayerManager.Instance.isAlive) { 
+            if(waveStart)
+            {
+                waveSizeCounter = waveSize;
+                waveStart = false;
+                waveOnPlay = true;
+                SpawnAsteroids();
+            }
+            foreach(Asteroid instanceAsteroid in asteroids)
+            {
+                if(instanceAsteroid != null)
+                    instanceAsteroid.verifyDistanceToPlayer(playerPos.position);
+            }
+            if(numAsteroid == 0 && waveOnPlay)
+            {
+                waveOnPlay = false;
+                waveCount++;
+                waveSize = waveSize * (1.3f + waveCount * Random.Range(0.05f, 0.15f));
+                Debug.Log("wave " + waveCount + " begin size " + waveSize);
+                asteroids.Clear();
+                PlayerManager.Instance.setCanFire();
+                UiManager.Instance.SetWaveCounter(waveCount);
+                UiManager.Instance.SetCoolDown(5);
+            }
         }
     }
 
