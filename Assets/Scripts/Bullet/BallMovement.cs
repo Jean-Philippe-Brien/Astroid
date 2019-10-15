@@ -34,9 +34,10 @@ public class BallMovement : MonoBehaviour
         {
             GameObject.Instantiate(GameLinks.gl.explosion, hit.transform.position + new Vector3(0,0,-1), Quaternion.identity);
             GameLinks.gl.explosion.GetComponent<ParticleSystem>().Play();
-            
+            WaveManager.Instance.CheckIfAsteroidHaveChild(hit.transform);
             Destroy(hit.transform.gameObject);
             WaveManager.Instance.numAsteroid--;
+            
             UiManager.Instance.SetAsteroidCounter(WaveManager.Instance.numAsteroid);
             Destroy(gameObject);
         }

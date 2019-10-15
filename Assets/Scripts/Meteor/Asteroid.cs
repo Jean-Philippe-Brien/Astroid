@@ -17,6 +17,7 @@ public class Asteroid : MonoBehaviour
     float rangeAngle;
     float seed;
     public float size;
+    public int subDivision;
     LineRenderer lineRend;
     PolygonCollider2D edgeCol2D;
     Rigidbody2D rb;
@@ -26,6 +27,18 @@ public class Asteroid : MonoBehaviour
         size = _size;
         mesh = new Mesh();
         seed = Random.Range(0, 20f);
+        if ((int)(size / 3) >= 2)
+        {
+            subDivision = 3;
+        }
+        else if ((int)(size / 2) >= 2)
+        {
+            subDivision = 2;
+        }
+        else
+        {
+            subDivision = 0;
+        }
 
         edgeCol2D = GetComponentInChildren<PolygonCollider2D>();
         lineRend = GetComponentInChildren<LineRenderer>();
@@ -35,14 +48,14 @@ public class Asteroid : MonoBehaviour
         lineRend.loop = true;
         CreateShape();
         UpdateMesh();
-        float asteroidSize = size / 3 > 8 ? 8 : size;
+        float asteroidSize = size / 6 > 8 ? 8 : size;
         transform.localScale = new Vector3(asteroidSize, asteroidSize, asteroidSize);
         Move();
     }
 
     void Move()
     {
-        rb.AddForce(Random.insideUnitCircle * Random.Range(3f, 10f), ForceMode2D.Impulse);
+        rb.AddForce(Random.insideUnitCircle * Random.Range(3f, 6.5f), ForceMode2D.Impulse);
     }
     void CreateShape()
     {
