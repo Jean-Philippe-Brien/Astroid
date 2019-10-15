@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(PolygonCollider2D))]
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
-public class Asteroid : MonoBehaviour, IManager
+public class Asteroid : MonoBehaviour
 {
     Mesh mesh;
     Vector3[] vertices;
@@ -16,14 +16,14 @@ public class Asteroid : MonoBehaviour, IManager
     int nbCorner;
     float rangeAngle;
     float seed;
-    float size;
+    public float size;
     LineRenderer lineRend;
     PolygonCollider2D edgeCol2D;
     Rigidbody2D rb;
 
-    void Start()
+    public void FirstInitialization(float _size)
     {
-        size = Random.Range(50000f, 100000f);
+        size = _size;
         mesh = new Mesh();
         seed = Random.Range(0, 20f);
 
@@ -35,6 +35,8 @@ public class Asteroid : MonoBehaviour, IManager
         lineRend.loop = true;
         CreateShape();
         UpdateMesh();
+        float asteroidSize = size / 3 > 8 ? 8 : size;
+        transform.localScale = new Vector3(asteroidSize, asteroidSize, asteroidSize);
         Move();
     }
 
@@ -129,23 +131,12 @@ public class Asteroid : MonoBehaviour, IManager
         p.y = ynew + cy;
         return p;
     }
-    public void Update()
-    {
-        /*Collider2D hit = Physics2D.OverlapCircle(transform.position, 10, LayerMask.GetMask("Meteor"));
-        if(hit != null)
-        {
-            Debug.Log(hit.transform.tag);
-        }*/
-    }
 
     public void PhysicsRefresh()
     {
     }
 
-    public void FirstInitialization()
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
     public void Refresh()
     {

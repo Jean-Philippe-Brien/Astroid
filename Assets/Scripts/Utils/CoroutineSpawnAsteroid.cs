@@ -10,11 +10,11 @@ public class CoroutineSpawnAsteroid : MonoBehaviour
     {
         instance = this;
     }
-    public static void SpawnAsteroid(GameObject asteroid, float waitStart)
+    public static void SpawnAsteroid(GameObject asteroid, float waitStart, float size)
     {
-        instance.StartCoroutine(instance.CoroutinespawnAsteroid(asteroid, waitStart));
+        instance.StartCoroutine(instance.CoroutinespawnAsteroid(asteroid, waitStart, size));
     }
-    public IEnumerator CoroutinespawnAsteroid(GameObject asteroid, float waitStart)
+    public IEnumerator CoroutinespawnAsteroid(GameObject asteroid, float waitStart, float size)
     {
         
         Collider2D hit;
@@ -26,6 +26,7 @@ public class CoroutineSpawnAsteroid : MonoBehaviour
             if (hit == null)
             {
                 GameObject newAsteroid = GameObject.Instantiate(asteroid);
+                newAsteroid.GetComponent<Asteroid>().FirstInitialization(size);
                 newAsteroid.transform.position = rotatePoint;
                 WaveManager.Instance.asteroids.Add(newAsteroid.GetComponent<Asteroid>());
                 

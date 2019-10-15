@@ -72,7 +72,7 @@ public class WaveManager : IManager
     public void SecondInitialization()
     {
         waveStart = false;
-        waveSize = 5000;
+        waveSize = 10;
         waveCount = 1;
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         UiManager.Instance.SetCoolDown(3);
@@ -83,9 +83,9 @@ public class WaveManager : IManager
         numAsteroid = 0;
         while (waveSizeCounter > 0)
         {
-
-            waveSizeCounter -= Random.Range(4,8);
-            CoroutineSpawnAsteroid.SpawnAsteroid(asteroid, numAsteroid);
+            float size = Random.Range(2f, 8f * waveCount);
+            waveSizeCounter -= size;
+            CoroutineSpawnAsteroid.SpawnAsteroid(asteroid, numAsteroid, size);
             numAsteroid++;
         }
         UiManager.Instance.SetAsteroidCounter(numAsteroid);
