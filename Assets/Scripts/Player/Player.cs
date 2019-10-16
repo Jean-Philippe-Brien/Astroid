@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     {
         bullet = Resources.Load<GameObject>("Prefabs/Bullet");
         rbPlayer = GetComponent<Rigidbody2D>();
-        rotationSpeed = 150.5f;
+        rotationSpeed = 220.5f;
         canFire = true;
         canShoot = false;
         counterBetweenFire = timeBetweenFire;
@@ -70,11 +70,21 @@ public class Player : MonoBehaviour
         {
             GameObject.Instantiate(GameLinks.gl.explosion, transform.position + new Vector3(0, 0, -1), Quaternion.identity);
             GameLinks.gl.explosion.GetComponent<ParticleSystem>().Play();
-            UiManager.Instance.SetCoolDownRespawn(3);
             live--;
-            UiManager.Instance.SetLiveCounter(live);
             canShoot = false;
             gameObject.SetActive(false);
+            if (live <= 0)
+            {
+                PlayerManager.Instance.isAlive = false;
+                UiManager.Instance.gameOverPanel.SetActive(true);
+            }
+
+            else
+            {
+                UiManager.Instance.SetCoolDownRespawn(3);
+                UiManager.Instance.SetLiveCounter(live);
+
+            }
         }
     }
 }

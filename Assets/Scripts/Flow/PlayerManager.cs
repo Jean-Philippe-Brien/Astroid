@@ -36,7 +36,6 @@ public class PlayerManager : IManager
     }
     public void playerDeath()
     {
-
     }
     public void setCanFire()
     {
@@ -44,12 +43,14 @@ public class PlayerManager : IManager
     }
     public void PhysicsRefresh()
     {
-        player.PhysicsRefresh(InputManager.Instance.physicsInputPkg);
+        if(isAlive)
+            player.PhysicsRefresh(InputManager.Instance.physicsInputPkg);
     }
 
     public void Refresh()
     {
-        player.Refresh(InputManager.Instance.UpdateInputPkg);
+        if (isAlive)
+            player.Refresh(InputManager.Instance.UpdateInputPkg);
     }
 
     public void SecondInitialization()

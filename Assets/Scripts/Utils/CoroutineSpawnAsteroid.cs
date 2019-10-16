@@ -12,7 +12,11 @@ public class CoroutineSpawnAsteroid : MonoBehaviour
     }
     public static void SpawnAsteroid(GameObject asteroid, float waitStart, float size)
     {
-        instance.StartCoroutine(instance.CoroutinespawnAsteroid(asteroid, waitStart, size));
+        if (PlayerManager.Instance.isAlive)
+        {
+            instance.StartCoroutine(instance.CoroutinespawnAsteroid(asteroid, waitStart, size));
+
+        }
     }
     public IEnumerator CoroutinespawnAsteroid(GameObject asteroid, float waitStart, float size)
     {
