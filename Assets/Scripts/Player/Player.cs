@@ -68,23 +68,26 @@ public class Player : MonoBehaviour
     {
         if(collision.transform.tag == "Meteor")
         {
-            GameObject.Instantiate(GameLinks.gl.explosion, transform.position + new Vector3(0, 0, -1), Quaternion.identity);
-            GameLinks.gl.explosion.GetComponent<ParticleSystem>().Play();
-            live--;
-            canShoot = false;
-            gameObject.SetActive(false);
-            if (live <= 0)
-            {
-                PlayerManager.Instance.isAlive = false;
-                UiManager.Instance.gameOverPanel.SetActive(true);
-            }
+            Die();
+        }
+    }
+    public void Die()
+    {
+        GameObject.Instantiate(GameLinks.gl.explosion, transform.position + new Vector3(0, 0, -1), Quaternion.identity);
+        GameLinks.gl.explosion.GetComponent<ParticleSystem>().Play();
+        live--;
+        canShoot = false;
+        gameObject.SetActive(false);
+        if (live <= 0)
+        {
+            PlayerManager.Instance.isAlive = false;
+            UiManager.Instance.gameOverPanel.SetActive(true);
+        }
 
-            else
-            {
-                UiManager.Instance.SetCoolDownRespawn(3);
-                UiManager.Instance.SetLiveCounter(live);
-
-            }
+        else
+        {
+            UiManager.Instance.SetCoolDownRespawn(3);
+            UiManager.Instance.SetLiveCounter(live);
         }
     }
 }

@@ -22,6 +22,7 @@ public class GameFlow : IManager
     bool isPaused = false;
     public void FirstInitialization()
     {
+        EnemyManager.Instance.FirstInitialization();
         UiManager.Instance.FirstInitialization();
         GameLinks.gl = GameObject.FindObjectOfType<GameLinks>();
         WorldManager.Instance.FirstInitialization();
@@ -38,6 +39,7 @@ public class GameFlow : IManager
         WaveManager.Instance.SecondInitialization();
         InputManager.Instance.SecondInitialization();
         PlayerManager.Instance.SecondInitialization();
+        //EnemyManager.Instance.AddEnemy();
     }
     public void Refresh()
     {
@@ -48,13 +50,15 @@ public class GameFlow : IManager
         WorldManager.Instance.Refresh();
         UiManager.Instance.Refresh();
         WaveManager.Instance.Refresh();
+        EnemyManager.Instance.Refresh();
         
 
     }
     public void PhysicsRefresh()
     {
+        
         InputManager.Instance.PhysicsRefresh();
         PlayerManager.Instance.PhysicsRefresh();
-        
+        EnemyManager.Instance.PhysicsRefresh();
     }
 }

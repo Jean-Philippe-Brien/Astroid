@@ -9,10 +9,10 @@ public class BallMovement : MonoBehaviour
     float timeBeforeDespawn;
     float speed;
     RaycastHit hitInfo;
+    [HideInInspector]public bool enemy;
     void Start()
     {
-
-        timeBeforeDespawn = 1.8f;
+        timeBeforeDespawn = 0.8f;
         speed = 40;
     }
 
@@ -21,8 +21,12 @@ public class BallMovement : MonoBehaviour
     {
         CheckOutBounds();
         timeBeforeDespawn -= Time.deltaTime;
-        Vector3 posDown = transform.position - (transform.up * (GetComponent<SpriteRenderer>().bounds.size.y / 2));        
-        RaycastHit2D hit = Physics2D.Raycast(posDown, transform.up, Time.fixedDeltaTime * speed, LayerMask.GetMask("Meteor"));
+        Vector3 posDown = transform.position - (transform.up * (GetComponent<SpriteRenderer>().bounds.size.y / 2));
+        RaycastHit2D hit;
+        if (enemy)
+            hit = Physics2D.Raycast(posDown, transform.up, Time.fixedDeltaTime * speed, LayerMask.GetMask("Player"));
+        else
+            hit = Physics2D.Raycast(posDown, transform.up, Time.fixedDeltaTime * speed, LayerMask.GetMask("Meteor", "Enemy"));
         if (timeBeforeDespawn > 0)
         {
             transform.Translate(Vector3.up * Time.fixedDeltaTime * speed);
@@ -34,11 +38,21 @@ public class BallMovement : MonoBehaviour
         {
             GameObject.Instantiate(GameLinks.gl.explosion, hit.transform.position + new Vector3(0,0,-1), Quaternion.identity);
             GameLinks.gl.explosion.GetComponent<ParticleSystem>().Play();
-            WaveManager.Instance.CheckIfAsteroidHaveChild(hit.transform);
-            Destroy(hit.transform.gameObject);
-            WaveManager.Instance.numAsteroid--;
-            
-            UiManager.Instance.SetAsteroidCounter(WaveManager.Instance.numAsteroid);
+            if (!enemy)
+            {
+                if(hit.transform.tag == "Enemy")
+                {
+                    hit.transform.GetComponent<Enemy>().Die();
+                }
+                WaveManager.Instance.CheckIfAsteroidHaveChild(hit.transform);
+                Destroy(hit.transform.gameObject);
+                WaveManager.Instance.numAsteroid--;
+                UiManager.Instance.SetAsteroidCounter(WaveManager.Instance.numAsteroid);
+            }
+            else
+            {
+                hit.transform.GetComponent<Player>().Die();
+            }
             Destroy(gameObject);
         }
         

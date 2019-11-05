@@ -55,6 +55,6 @@ public class PlayerManager : IManager
 
     public void SecondInitialization()
     {
-        
+
     }
 }

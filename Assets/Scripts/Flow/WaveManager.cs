@@ -31,6 +31,7 @@ public class WaveManager : IManager
     GameObject asteroid;
     public List<Asteroid> asteroids = new List<Asteroid>();
 
+
     public void FirstInitialization()
     {
         
@@ -102,6 +103,7 @@ public class WaveManager : IManager
             CoroutineSpawnAsteroid.SpawnAsteroid(asteroid, numAsteroid, size);
             //numAsteroid++;
         }
+        EnemyManager.Instance.AddEnemy();
         UiManager.Instance.SetAsteroidCounter(numAsteroid);
     }
     public void CheckIfAsteroidHaveChild(Transform asteroid)
